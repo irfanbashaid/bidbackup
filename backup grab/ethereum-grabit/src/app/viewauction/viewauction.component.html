@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <div class="container">
+     <div class="row">
+          <h1>{{this.grabit.prod_zoom['ProductName']}}</h1>
+        <div class="col-sm-6 " >
+          <div class="row">
+            <div class="col-sm-8 auction">
+                <div class="container spacemargin" >
+                    <img id="detimg" class="card-img-top" src="{{this.grabit.prod_zoom['Url']}}" style="height: 250px;width: 250px" alt="Card image cap">
+                 </div>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-sm-6 ">
+            <p *ngIf="successful_message" style="text-align: center;color: green">Your Bid recorded successfully</p>
+            <p *ngIf="last_Bidder_message" style="text-align: center;color: blue">You are currently the last Bidder</p>
+            <p *ngIf="not_successful_error" style="text-align: center;color: red">Bid was not successfully placed</p>
+            <p *ngIf="basePrice_reached" style="text-align: center;color: red"> Bid {{current_auctionId}} exceeding the Base Price.</p>
+            <br>
+          <div class="row">
+            <div class="col-sm-3 spacemargin">
+                <div class="timer col-sm-12" style="background-color: white">
+                    <div  class="spacemargin" *ngIf="!timeshow || btn_show_closed">
+                      <p id="timer_id" *ngIf="btn_show">{{this.hour_shower|number:'2.0'}}:{{min_shower|number:'2.0'}}:{{sec_shower|number:'2.0'}}</p>
+                      <p *ngIf="btn_show_closed">Closed</p>
+                      <!-- <p *ngIf="this.grabit.prod_zoom['Bidder_name']!=undefined">{{this.grabit.prod_zoom["datedata"]}}</p> -->
+                      
+                    </div>
+                    <div>
+                        <P *ngIf="this.grabit.prod_zoom['Bidder_name']!=undefined">{{this.grabit.prod_zoom['Bidder_name']}}</P>
+                    </div>
+                    <div *ngIf="timeshow" style="padding: 10px">
+                      <p>{{this.grabit.prod_zoom["datedata"]}}</p>
+                      <!-- <P *ngIf="this.grabit.prod_zoom['Bidder_name']!=undefined">{{this.grabit.prod_zoom['Bidder_name']}}</P> -->
+                    </div>
+                  </div>
+            </div>
+            <div class="col-sm-8 spacemargin">              
+                <div  class="bidbox form-group">
+                    <div class="spacemargin">
+                     <h4 *ngIf="!btn_show_upcoming">Last Bided Amount:{{this.grabit.prod_zoom['last_Bidded_amount']}}</h4> 
+                     <span class="bid-price">Required Bidders&nbsp;&nbsp;<label style="color: red">{{this.grabit.prod_zoom['required']}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                     </span>
+                     <span class="bid-price" >Registered Bidders&nbsp;&nbsp;<label style="color: green">{{this.grabit.prod_zoom['registered']}}</label>
+                    </span>
+                     <br>
+                      <button  *ngIf="btn_show && !btn_show_upcoming && this.grabit.prod_zoom['status']==1 && this.grabit.prod_zoom['registered'] >= this.grabit.prod_zoom['required'] "(click)="manualBidding(this.grabit.prod_zoom['Auction_Id'])" class="btn btn-warning" style="padding:0%;" id="btn">&nbsp;<i class="fas fa-sync-alt"></i>&nbsp;&nbsp;BID {{this.grabit.prod_zoom['buttonbid']}} GRBT</button>
+                      <p *ngIf="this.grabit.prod_zoom['status']==0" style="color: red">Not Registered</p>
+                      <p *ngIf="this.grabit.prod_zoom['status']==1 && this.grabit.prod_zoom['registered']  < this.grabit.prod_zoom['required']" style="color: green">Registered</p>
+
+                    </div>
+                  </div>
+            </div>
+            <div class="col-sm-1"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+                <div class="btn-group auction" style="text-align:center;">
+                    <button type="button" class="btn btn-warning btn-lg" id="acif" >Auction Information</button>                    
+                   </div>
+                   <div class="col-sm-12 tabcontent" id="auction-information" style="display: block;border: 1px  sandybrown">
+                      <div class="auction-info">
+                          <ul>
+                             <li> <span class="subhead">Auction ID:</span>
+                                &nbsp;&nbsp;<span id="Body_lblAuctionID">{{this.grabit.prod_zoom['Auction_Id']}}</span>
+                             </li>
+                             <li><span class="subhead">BASE PRICE:</span>
+                                <span>
+                                    &nbsp;&nbsp;<span id="Body_lblPrice">{{this.grabit.prod_zoom['Amount']}}</span>&nbsp;GRBT</span>
+                             </li>
+                             <li><span class="subhead"> Bid Reset Time:</span>
+                                <span>
+                                    &nbsp;&nbsp;<span id="Body_lblBidReset">{{this.grabit.prod_zoom['resetTime']}} seconds</span></span>
+                             </li>
+                             <li><span class="subhead">Bid Increment Type:</span>
+                                <span>
+                                    &nbsp;&nbsp;<span id="Body_lblPerBidcredit">{{this.grabit.prod_zoom['bidIncrement']}}</span></span>
+                             </li>
+                          </ul>
+                       </div> 
+                  </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="btn-group auction" style="text-align:center;">                   
+                    <button *ngIf="!btn_show_upcoming" type="button" class="btn btn-warning btn-lg" id="bidhis">Bidding History</button>
+                   </div>
+                   <!-- <div style="border: 1px  sandybrown"> -->
+                      <!-- <div class="btn-group auction" style="text-align:center;">
+                         <button type="button" class="btn btn-warning btn-lg" id="acif" >Auction Information</button>
+                         <button *ngIf="!btn_show_upcoming" type="button" class="btn btn-warning btn-lg" id="bidhis">Bidding History</button>
+                        </div> -->
+                        <div>
+                        
+                         <div *ngIf="!btn_show_upcoming" class="col-sm-12 tabcontent" id="auction-information" style="display: block;overflow: auto; height:160px;border: 1px  sandybrown">
+                           <table class="table">
+                             <thead>
+                               <th>Price</th>
+                               <th>User</th>
+                             </thead>
+                             <tbody>
+                               <tr *ngFor="let i of bidder_history" >                                                
+                                   <td>{{i.Price}}</td>
+                                   <td>{{i.Name}}</td> 
+                               </tr>
+                             </tbody>
+                           </table>
+                         </div>
+                     </div>
+                      <!-- </div> -->
+
+            </div>
+          </div>
+          
+           <br><br>
+
+          
+
+
+        
+     </div>
+  </div>
+</div>

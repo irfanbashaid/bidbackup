@@ -1,0 +1,61 @@
+.auction-block {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+ }
+
+ h3{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:35px;
+    color:  #243276;
+ }
+ /* #borderimg {
+    border: 35px solid #d84800b5;
+    padding: 15px;
+    height: 800px;
+ } */
+ .fa-trophy{
+    font-size: 30px;
+    color:#243276;
+ }
+ .containerone{
+    background-color: whitesmoke;
+   
+}
+
+/* h1 {
+    color: #666;
+    font-size: 22px;
+    margin-top:20px;
+    margin-bottom:20px;
+    text-align: center;
+} */
+
+/* 
+.content {
+    padding-top: 30px;
+    padding-bottom: 30px;
+} */
+
+
+/* .boxshadow {
+    box-shadow: -5px 0 5px -5px rgba(93, 91, 91, 0.493), 5px 0 5px -5px rgba(93, 91, 91, 0.493),0px 15px 10px -15px rgba(93, 91, 91, 0.493);
+} */
+
+.c{
+    text-align: center;;
+}
+
+ ul{
+    color: #3d4d65;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:30px;
+}
+
+
+#borderimg { 
+    border: 20px solid transparent;
+    padding: 15px;
+    border-image: url(../../assets/images/border.png) 20 round;
+}

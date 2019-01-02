@@ -1,0 +1,161 @@
+<div class="page-header page-header-inverse" style=" background-color: #273246">
+    <div class="navbar navbar-inverse navbar-transparent">
+        <div class="navbar-header">
+           <a class="navbar-brand"></a>
+           <ul class="nav navbar-nav pull-right visible-xs-block">
+              <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-grid3"></i></a></li>
+           </ul>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+          <div class="row">
+            <div class="col-sm-5 ">
+                    <h4 style="font-family: Comic Sans MS; font-size: 40px;font-weight: 300;">Grraabit</h4>
+            </div>
+            <div class="col-sm-4 topspace">
+             
+                </div>
+           <div class="col-sm-2 topspace">
+              <div class="navbar-right">
+                  <ul class="nav navbar-nav">
+                     <li class="dropdown dropdown-user">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="texttransform">{{owner_name}}</span>
+                        <i class="caret"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a (click) = "chooseTab(5)"><i class="icon-user"></i>My Account</a></li>
+                            <li class="divider"></li>
+                            <li><a (click)="onLogout()"><i class="icon-switch2"></i> Logout</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+        </div>
+        </div>
+     </div>
+        <!-- <div class="navbar navbar-inverse navbar-transparent">
+          <div class="page-title">
+            <h4 style="font-family: Comic Sans MS; font-size: 40px;font-weight: 300;">Grraabit</h4>
+          </div>
+    
+          <div class="heading-elements">
+                <ul class="nav navbar-nav navbar-nav-material Logout navbar-right">           
+                        <li class="dropdown">
+                          <div  class="dropdown-toggle" data-toggle="dropdown">                            
+                           {{owner_name}}
+                            <span class="caret"></span>
+                          </div>                         
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a (click) = "chooseTab(5)"><i class="icon-user"></i>My Account</a></li>                           
+                            <li class="divider"></li>
+                            <li><a (click)="onLogout()"><i class="icon-switch2"></i> Logout</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+          </div>
+        </div> -->
+
+        <div class="navbar navbar-inverse navbar-transparent" id="navbar-second">
+          <ul class="nav navbar-nav visible-xs-block">
+            <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i style="color: white" class="icon-paragraph-justify3"></i></a></li>
+          </ul>
+    
+          <div class="navbar-collapse collapse" id="navbar-second-toggle">
+            <ul class="nav navbar-nav navbar-nav-material">
+              <li><a (click)="chooseTab(1)">Create Auction </a></li>
+    
+              <li class=" mega-menu mega-menu-wide">
+                <a (click)="chooseTab(2)" >Send Credits </a>
+              </li>
+    
+              <li class=" mega-menu mega-menu-wide">
+                <a (click)="chooseTab(3)" >Change Ownership </a>
+              </li>
+    
+              <li >
+                <a (click)="chooseTab(4)" >
+                        Finalize Auction 
+                </a>
+          
+        </li>
+    
+              <li >
+                <a (click)="chooseTab(8)">
+                        Select Auction 
+                </a>    
+                </li>
+
+                    
+              <!-- <li class=" mega-menu mega-menu-wide">
+                <a (click)="chooseTab(10)" >Clone Auction </a>
+              </li> -->
+              <li class=" mega-menu mega-menu-wide">
+                  <a (click)="chooseTab(11)" >Registration Details</a>
+                </li>
+            </ul>
+          </div>
+        </div>  
+      </div>         
+
+      <div class="container" [ngSwitch]="tabSelected">
+        <div class="row">
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="col-sm-12" style="margin-bottom: 48px;">
+                               <div *ngSwitchCase="1">
+                                               <app-create-auction></app-create-auction>
+                                            </div>
+                                            <div *ngSwitchCase="2">
+                                               <app-sendcredits></app-sendcredits>
+                                            </div>
+                                            <div *ngSwitchCase="3">
+                                               <app-changeowner></app-changeowner>
+                                            </div>
+                                            <div *ngSwitchCase="4">
+                                               <app-setresult></app-setresult>
+                                            </div>
+                                            <div *ngSwitchCase="5">
+                                               <app-myaccount></app-myaccount>
+                                            </div>
+                                            <div *ngSwitchCase="6">
+                                               <app-bidlog></app-bidlog>
+                                            </div>
+                                            <div *ngSwitchCase="7">
+                                               <app-winhistory></app-winhistory>
+                                            </div>
+                                            <div *ngSwitchCase="8">
+                                                <app-select></app-select>
+                                             </div>
+                                             <!-- <div *ngSwitchCase="10">
+                                                <app-cloneauction></app-cloneauction>
+                                             </div> -->
+                                             <div *ngSwitchCase="11">
+                                                <app-registrationdetails></app-registrationdetails>
+                                             </div>
+                </div>
+        </div>
+ </div> 
+
+
+
+
+ <div class="navbar navbar-default navbar-fixed-bottom footer">
+  <ul class="nav navbar-nav visible-xs-block">
+     <li><a class="text-center collapsed" data-toggle="collapse" data-target="#footer"><i class="icon-circle-up2"></i></a></li>
+  </ul>
+  <div class="navbar-collapse collapse" id="footer">
+     <div class="navbar-text">
+        &copy; 2018. <a href="#" class="navbar-link">Grraabit Auction</a> by <a href="http://chainflux.com/" class="navbar-link" target="_blank">Chainflux</a>
+     </div>
+     <div class="navbar-right">
+        <ul class="nav navbar-nav">
+           <li><a href="http://chainflux.com/about">About</a></li>
+           <li><a href="http://chainflux.com/terms">Terms</a></li>
+           <li><a href="http://chainflux.com/contactus">Contact</a></li>
+        </ul>
+     </div>
+  </div>
+</div>
+
+
+<div><ngx-spinner></ngx-spinner></div>

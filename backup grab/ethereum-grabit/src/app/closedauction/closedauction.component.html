@@ -1,0 +1,62 @@
+<div class="container-fluid"  style="height: 600px;text-align: center;text-transform: uppercase" *ngIf="!this.grabit.imgshow">
+    <div  *ngFor="let image of images" >
+       <div class="col-sm-4"  style="margin-top: 20px;margin-bottom: 75px;text-align: center;">
+          <div class="row">
+             <div class="col-sm-10"  style="margin-top:25px">
+                <div>
+                   <div class="card" style="border: 1px solid #274356;background-color:white;padding:0 0 10px 0;">
+                      <div class="card-header">
+                         <h4>{{image.ProductName}}</h4>
+                      </div>
+                      <hr>
+                      <div class="card-body">
+                          <span class="bid-price">Required Bidders&nbsp;&nbsp;
+                        <label id="Price16720" style="color: red"> {{image.required}}</label>
+                    </span>&nbsp;&nbsp;&nbsp;
+                    <span class="bid-price" >Registered Bidders&nbsp;&nbsp;
+                            <label id="Price16720" style="color: blue;"> {{image.registered}}</label>
+                        </span>
+                        <br>
+                        <span>Registration Amount&nbsp;&nbsp;
+                                <label id="Price16720" style="color: green">{{image.minimumbid}}&nbsp;&nbsp;<label style="color:black">GRBT</label></label>
+                                </span>
+                            <h5 class="card-title"><span class="subhead">Base Price:</span> {{ image.Amount }} <span class="subhead">GRBT</span></h5>
+                         <div class="card-body" style="text-align: center">
+                            <img   a (click)="zoom_product(image.ProductName,image.Amount,image.Url,image.Auction_Id,image.bidIncrement,image.Last_Bidded_amount,image.Bidder_name,image.resetTime)" class="card-img-top" src={{image.Url}} style="height: 250px;width: 250px" alt="Card image cap">
+                         </div>
+                         <div class="bid-credit-row">
+                             <div class="row">
+                                 <div class="col-sm-6"> 
+                                        <span class="auction-id"><span class="subhead">Auction ID:</span>{{image.Auction_Id}}</span>
+                                 </div>
+                                 <div class="col-sm-6">
+                                        <span >{{image.Bidder_name}}</span>
+                                 </div>
+                             </div>
+                            
+                            <!-- <a class="bid-credit" title="Number of Require Credits Per BID">5x</a> -->
+                         </div>
+                         <p  *ngIf="image.status==0"style="color: red">Not Registered</p>
+                         <p  *ngIf="image.status==1" style="color: green">Registered</p>                  
+                                <div class="bid-credit-row2">
+                            <span class="bid-price"><span class="subhead">Closed at :</span>
+                            <label id="Price16720"> {{image.Last_Bidded_amount}} GRBT</label>
+                            </span>   
+                         </div>
+                         <hr>
+                         <div class="card-footer">
+                                <button  class="btn btn-warning" id="btn" disabled>&nbsp;&nbsp;&nbsp;Closed</button>
+                             </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-sm-2"></div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <div *ngIf="this.grabit.imgshow">
+    <app-viewauction></app-viewauction>
+ </div>
+ 

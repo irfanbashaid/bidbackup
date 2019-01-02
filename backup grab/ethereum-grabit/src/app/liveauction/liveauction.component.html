@@ -1,0 +1,75 @@
+<div class="container-fluid" style="height: 600px;text-align: center;text-transform: uppercase" *ngIf="!this.grabit.imgshow">
+    <p *ngIf="successful_message" style="text-align: center;color: green">Your Bid for Auction {{current_auctionId }} was recorded successfully</p>
+    <p *ngIf="not_successful_error" style="text-align: center;color: red">Your Bid for Auction {{current_auctionId }} was not successfully placed</p>
+    <p *ngIf="last_bidder_message" style="text-align: center;color: blue">You are currently the last Bidder for Auction {{current_auctionId}}</p> 
+    <p *ngIf="basePrice_reached" style="text-align: center;color: red"> Bid {{current_auctionId}} exceeding the Base Price.</p>
+    <div  *ngFor="let i of images" >
+       <div class="col-sm-4"  style="margin-top: 20px;margin-bottom: 75px;text-align: center;">
+            <div class="row">
+                 <div class="col-sm-10"  style="margin-top:25px">
+                    <div>
+                        <div class="card" style="border: 1px solid #274356;background-color:white;padding:0 0 10px 0;">
+                            <div class="card-header">
+                                <h4>{{i.ProductName}}</h4>
+                            </div>
+                            <hr>
+                            <div class="card-body">
+                                <span class="bid-price">Required Bidders&nbsp;&nbsp;
+                                        <label id="Price16720" style="color: red"> {{i.required}}</label>
+                                    </span>&nbsp;&nbsp;&nbsp;
+                                    <span class="bid-price" >Registered Bidders&nbsp;&nbsp;
+                                            <label id="Price16720" style="color: blue;"> {{i.registered}}</label>
+                                        </span>
+                                        <br>
+                                        <span>Registration Amount&nbsp;&nbsp;
+                                                <label id="Price16720" style="color: green">{{i.minimumbid}}&nbsp;&nbsp;<label style="color:black">GRBT</label></label>
+                                                </span>
+                                <h5 class="card-title"><span class="subhead"> Base Price:</span>{{ i.Amount }} GRBT</h5>
+                                <div class="card-body" style="text-align: center;">
+                                    <img  a (click)="zoom_product(i.ProductName,i.Amount,i.Url,i.Auction_Id,i.bidIncrement,i.last_Bidded_amount,i.Bidder_name,i.buttonbid,i.resetTime,i.datedata,i.timeshow)" class="card-img-top" src={{i.Url}} style="height: 250px;width: 250px" alt="Card image cap">
+                                </div>
+                                <div class="bid-credit-row">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <span class="auction-id" ><span class="subhead">Auction ID:</span>{{i.Auction_Id}}</span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a class="bid-credit" title="Bid Type">{{i.bidIncrement}}X</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bid-row cf">                                   
+                                    <span class="bid-price" style="font-weight: bold">GRBT:
+                                            <label id="Price16720"> {{i.last_Bidded_amount}}</label>
+                                        </span>
+                                    <div class="bid-status">
+                                        <div id="dvzoom16720"  *ngIf="!i.timeshow">
+                                            {{hour_shower[i.Auction_Id]|number:'2.0'}}:{{min_shower[i.Auction_Id]|number:'2.0'}}:{{sec_shower[i.Auction_Id]|number:'2.0'}}
+                                        </div>
+                                        <div *ngIf="i.timeshow">
+                                            {{i.datedata}}
+                                        </div>
+                                        <span class="bidder-name">
+                                            <label id="UserName16720">{{i.Bidder_name}}</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="card-footer">
+                                    <button *ngIf="i.status==1 && i.registered >=i.required " (click)="manualBidding(i.Auction_Id)" class="btn " id="{{i.buttonbid}}">&nbsp;&nbsp;&nbsp;BID {{i.buttonbid}} GRBT</button>                            
+                                    <p *ngIf="i.status==0" style="color: red">Not Registered</p>
+                                    <p *ngIf="i.status==1 && i.registered < i.required " style="color: green">Registered</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="this.grabit.imgshow">
+    <app-viewauction></app-viewauction>
+</div>
+ 

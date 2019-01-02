@@ -1,0 +1,70 @@
+<div class = "container-fluid" >
+    <div class = "row">
+    <div class="col-sm-6 auction" >
+    <div class="panel panel-default ">
+      <div class="panel-heading text-size">OVERALL AUCTIONS</div>
+      <div class="panel-body">
+         <input type="text" id="myInput" (keyup)="myFunction()" class="form-control" placeholder="Search for productNames.." title="Type in a name">
+         
+        <form class="form-inline">
+          <div class="form-group" style="text-align: center;margin: 30px 0 0 0;max-height:500px">          
+              <div class="table-responsive" style="max-height:500px">
+                  <table class="table table-bordered table-framed" id="select">
+                      <thead class="tablecolor" >
+                          <tr>
+                            <th>Auction Id</th>
+                            <th>Product Name </th>
+                            <th></th>
+          
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr class="trhighlighting" *ngFor="let element of auction">
+                            <td>{{ element.auctionId }}</td>
+                            <td>{{ element.productname }}</td>
+                            <td><button type="button" class="btn btn-warning " value="select" (click)="storeaid( element.auctionId )">Select</button></td>
+                           </tr>
+                      </tbody>
+                  </table>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    
+    
+    
+    
+    <div class="col-sm-6 auction" >
+    <div class="panel panel-default ">
+      <div class="panel-heading text-size">DISPLAYED AUCTIONS</div>
+      <div class="panel-body">
+        <form class="form-inline">
+          <div class="form-group" style="text-align: center;max-height:600px">           
+              <div class="table-responsive"  style="max-height:600px">
+                  <table class="table table-bordered table-framed">
+                      <thead class="tablecolor ">
+                          <tr>
+                            <th>Auction Id</th>
+                            <th>Product Name </th>
+                            <th></th>
+          
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr class="trhighlighting" *ngFor="let element of selected_aid">
+                            <td>{{ element.auctionId }}</td>
+                            <td>{{ element.productname }}</td>
+                            <td><button type="button" class="btn btn-warning " value="select" (click)="storeaid(element.auctionId)">Remove</button></td>
+                          </tr>
+                      </tbody>
+                  </table>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>

@@ -1,0 +1,29 @@
+<div class="panel panel-flat">
+  <div class="panel-heading">
+      <h5 class="panel-title">Win History</h5>
+      <div class="heading-elements">
+      </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-framed">
+        <thead>
+          <tr style="background-color:#273246;color:#ffffff;">
+            <th>Auction ID</th>
+            <th>Product name</th>
+            <th>Credits</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let history of history">
+            <td>{{history.auctionid}}</td>
+            <td>{{history.productname}}</td>
+            <td>{{history.amount}}</td>
+            <td>{{history.time}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

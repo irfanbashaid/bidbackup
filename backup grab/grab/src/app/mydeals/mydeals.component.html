@@ -1,0 +1,272 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="container">
+            <nav class="fixed-side-menu">
+                <ul class="fixed-side-menu-list">
+                    <li class="active">
+                        <a (click)="setdealcontent(1)">MY ACTIVE DEALS <span class="badge badge-secondary" style="float: right">2</span></a>
+                    </li>
+                    <li >
+                        <a (click)="setdealcontent(2)">GRAABIT TOTAL
+BALANCE <br> <div style="font-size: 1.5rem; padding-top: 0.5rem">{{grabBalance}}</div>
+</a>
+                    </li>
+                    <li>
+                        <a (click)="setdealcontent(3)">BUY BID PACKS</a>
+                    </li>
+                    <li>
+                        <a (click)="setdealcontent(4)" >MY FINISHED DEALS</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+    <div [ngSwitch]="mydealcontent" class="col-md-8">
+      <div *ngSwitchCase="1" >
+        <div *ngIf="noActiveDeal" class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <h5>No Deals to Show</h5>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="alert alert-info alert-dismissible" *ngIf="last_bidder_message">
+            <a (click)="dismiss_last_bidder_message()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Currently You Are The Last Bidder...!</strong>&nbsp;&nbsp;&nbsp; 
+        </div>
+        <div class="alert alert-warning alert-dismissible" *ngIf="basePrice_reached">
+            <a (click)="dismiss_basePrice_reached()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Base Price Reached...</strong>&nbsp;&nbsp;&nbsp; 
+        </div>
+        <div class="alert alert-success alert-dismissible" *ngIf="bidPlacedMsg">
+            <a (click)="dismiss_bidPlacedMsg()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success! Bid Placed</strong>&nbsp;&nbsp;&nbsp; 
+        </div>
+        <div class="alert alert-warning alert-dismissible" *ngIf="bidNotPlacedMsg">
+            <a (click)="dismiss_bidNotPlacedMsg()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Error! Bid Not Placed</strong>&nbsp;&nbsp;&nbsp; 
+        </div>
+        <div class="row">
+          <div *ngFor="let myDeal of myRegDealArray" class="col-md-6">
+              <br>
+              <div class="well">
+                  <div class="heading">
+                      <h4 *ngIf="myDeal.ismeetrequired">ACTIVE {{myDeal.productname}} DEAL <br> <span><h5>{{hour_shower[myDeal.auctionid]|number:'2.0'}}:{{min_shower[myDeal.auctionid]|number:'2.0'}}:{{sec_shower[myDeal.auctionid]|number:'2.0'}}&nbsp;&nbsp; left</h5></span></h4>
+                      <h4 *ngIf="!myDeal.ismeetrequired">{{myDeal.productname}} DEAL <br> </h4>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-3">
+                          <img src="https://ipfs.infura.io/ipfs/{{myDeal.ipfsimghash}}" alt="" style="max-width: 100%">
+                      </div>
+                      <div class="col-md-9"> <br>
+                          <h4 class="text-secondary">{{myDeal.productname}}</h4>
+                          <p *ngIf="myDeal.ismeetrequired" class="text-muted">HIGHEST DEAL {{myDeal.highestbidamount}} </p>
+                          <p *ngIf="!myDeal.ismeetrequired"> Minimum Bidders not reached ({{myDeal.registered}}/{{myDeal.required}}). </p>
+                      </div>
+
+                      <br><br>
+
+                  </div>
+                  <div class="row text-right">
+
+                      <div class="col-md-12">
+                          <button class="btn btn-danger">MORE DETAILS</button>
+                          <button class="btn btn-danger">DISCOUNT FEATURES</button>
+
+                      </div>
+                  </div>
+              </div>
+              <button *ngIf="myDeal.ismeetrequired" class="btn btn-danger btn-block" (click)="manualBidding(myDeal.auctionid)">{{myDeal.nextbidamount}} BID NOW</button>
+              <br>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="2" >
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="heading">
+                      <h3>SELECT DEAL PACKS</h3>
+                  </div>
+              </div>
+      
+              <div class="col-md-6">
+                  <div class="well">
+                      <div class="row">
+                          <div class="col-md-3">
+                              <img src="../assets/images/s5.jpg" alt="" style="max-width: 100%">
+                          </div>
+                          <div class="col-md-9"> <br>
+                              <h3 class="text-secondary">1000 Rs | 20 DEALS</h3>
+      
+                          </div>
+      
+      
+                      </div>
+                  </div>
+                  <button class="btn btn-danger btn-block">EACH DEAL Price + 500 Rs</button>
+              </div>
+              <div class="col-md-6">
+                  <div class="well">
+      
+                      <div class="row">
+                          <div class="col-md-3">
+                              <img src="../assets/images/s6.jpg" alt="" style="max-width: 100%">
+                          </div>
+                          <div class="col-md-9"> <br>
+                              <h3 class="text-secondary">5000 Rs | 10 DEALS</h3>
+      
+                          </div>
+      
+      
+                      </div>
+                  </div>
+                  <button class="btn btn-danger btn-block">EACH DEAL Price + 500 Rs</button>
+              </div>
+          </div>
+      
+      
+          <br><br><br>
+          <div class="list-type5">
+              <ol>
+      
+                  <li><a >BUY DEAL PACK </a></li>
+                  <li><a >SELECT YOUR GRAB DEAL </a></li>
+                  <li><a >DEAL GOES LIVE IF ACTIVATED  </a></li>
+                  <li><a >BID FOR DEAL  </a></li>
+                  <li><a >END OF ACTIVE DEAL  </a></li>
+                  <li><a >HIGHEST BID WINS  </a></li>
+      
+              </ol>
+          </div>
+      </div>
+      <div *ngSwitchCase="3" >
+          <div class="row">
+               <div class="col-md-12">
+                   <div class="heading">
+                       <h3>SELECT DEAL PACKS</h3>
+                   </div>
+               </div> 
+               
+               <div class="col-md-6" style="margin-top: 20px">
+                   <div class="well">
+                       <div class="row">
+                           <div class="col-md-3">
+                               <img src="../assets/images/s5.jpg" alt="" style="max-width: 100%">
+                           </div>
+                           <div class="col-md-9"> <br>
+                               <h3 class="text-secondary">1000 Rs | 20 DEALS</h3>
+
+                           </div>
+
+
+                       </div>
+                   </div>
+                   <button class="btn btn-danger btn-block">EACH DEAL Price + 50 Rs</button>
+               </div>
+               <div class="col-md-6" style="margin-top: 20px">
+                   <div class="well">
+
+                       <div class="row">
+                           <div class="col-md-3">
+                               <img src="../assets/images/s5.jpg" alt="" style="max-width: 100%">
+                           
+                           </div>
+                           <div class="col-md-9"> <br>
+                               <h3 class="text-secondary">5000 Rs | 10 DEALS</h3>
+                           </div>
+
+
+                       </div>
+                   </div>
+                   <button class="btn btn-danger btn-block">EACH DEAL Price + 500 Rs</button>
+               </div>
+               
+               <div class="col-md-6" style="margin-top: 20px">
+                   <div class="well">
+                       <div class="row">
+                           <div class="col-md-3">
+                               <img src="../assets/images/s6.jpg" alt="" style="max-width: 100%">
+                              
+                           </div>
+                           <div class="col-md-9"> <br>
+                               <h3 class="text-secondary">10000 Rs | 20 DEALS</h3>
+
+                           </div>
+
+
+                       </div>
+                   </div>
+                   <button class="btn btn-danger btn-block">EACH DEAL Price + 500 Rs</button>
+               </div>
+               <div class="col-md-6" style="margin-top: 20px">
+                   <div class="well">
+
+                       <div class="row">
+                           <div class="col-md-3">
+                               <img src="../assets/images/s6.jpg" alt="" style="max-width: 100%">
+                           </div>
+                           <div class="col-md-9"> <br>
+                               <h3 class="text-secondary">15000 Rs | 5 DEALS</h3>
+
+                           </div>
+
+
+                       </div>
+                   </div>
+                   <button class="btn btn-danger btn-block">EACH DEAL Price + 3000 Rs</button>
+               </div>
+           </div>
+           
+       </div>   
+       <div *ngSwitchCase="4" >
+            <div *ngIf="noMyExpDeal" class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h5>No Deals to Show</h5>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>           
+            <div *ngFor="let expDeal of myExpDealArray" class="row">
+                <div class="col-md-12" style="margin-top: 20px">
+                    <div class="well">
+                        <div class="heading">
+                            <h4>{{expDeal.productname}} DEAL | WINNER {{expDeal.winner}} </h4><small> {{expDeal.expDate}}</small> 
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="https://ipfs.infura.io/ipfs/{{expDeal.ipfsimghash}}" alt="" style="max-width: 100%">
+                            </div>
+                            <div class="col-md-9"> <br>
+                                <h4 class="text-secondary">{{expDeal.productname}}</h4>
+                                <p class="text-muted">HIGHEST DEAL {{expDeal.winamount}}</p>
+                            </div>
+                            
+                            <div class="btn-danger details-block" >
+                                <small>You Spent {{expDeal.totalBidAmount}}</small>
+                                <h5>Buy Now</h5>
+                                <h3>@ 5500 Rs</h3>
+                                <small>0 Days Left</small>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br><br>
+
+                        </div>
+                        <div class="row text-right">
+
+                            <div class="col-md-12">
+                                <button class="btn btn-danger">MORE DETAILS</button>
+                                <button class="btn btn-danger">DISCOUNT FEATURES</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>      
+       <br/><br/>    
+    </div>
+
+</div>

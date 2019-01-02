@@ -1,0 +1,12 @@
+.text-size{
+    font-size: 13px;
+    font-weight: bolder; 
+ }
+
+ thead{
+    background-color:#273246;
+    color: white;
+}
+.trhighlighting:hover{
+    background-color: bisque
+ }

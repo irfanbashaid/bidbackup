@@ -1,0 +1,148 @@
+
+<div class="container-fluid" >
+<ul class="nav nav-tabs tabswitch" id="myTab" role="tablist">
+   
+  <li class="nav-item">
+    <a  class="nav-link a" id="prereg-tab" (click)="change_state()" data-toggle="tab" href="#prereg" role="tab" aria-controls="prereg" aria-selected="false">Registration</a>
+  </li>
+  <li class="nav-item">
+      <a  class="nav-link a" id="upcoming-tab" (click)="change_state()" data-toggle="tab" href="#upcoming" role="tab" aria-controls="upcoming" aria-selected="false"><span class="icon-spinner3 spinner position-left"></span>Upcoming Registration</a>
+    </li>
+  <li class="nav-item">
+    <a  class="nav-link a" id="outofreg-tab" (click)="change_state()" data-toggle="tab" href="#outofreg" role="tab" aria-controls="outofreg" aria-selected="false">Closed Registration</a>
+  </li>
+</ul>
+<h5 *ngIf="success_message" style="text-align: center;color: green">Registered Successfully</h5>
+<h5 *ngIf="error_message" style="text-align: center;color: red">Unable To Register</h5>
+<div class="tab-content "  id="myTabContent">
+    <div class="tab-pane fade " id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">   
+        <div  *ngFor="let i of upcoming" >
+            <div class="col-sm-4"  style="margin-top: 20px;margin-bottom: 75px;text-align: center;">
+               <div class="row">
+                  <div class="col-sm-10"  style="margin-top:25px">
+                     <div>
+                        <div class="card" style="border: 1px solid #274356;background-color:white;padding:0 0 10px 0;">
+                           <div class="card-header">
+                              <h4>{{i.ProductName}}</h4>
+                           </div>
+                           <hr>
+                           <div class="card-body">
+                              <span class="bid-price">Required Bidders&nbsp;&nbsp;
+                                  <label id="Price16720" style="color: red"> {{i.required}}</label>
+                              </span>&nbsp;&nbsp;&nbsp;
+                              <span>Registration Amount&nbsp;&nbsp;
+                                    <label id="Price16720" style="color: green">{{i.minimumbid}}&nbsp;&nbsp;<label style="color:black">GRBT</label></label>
+                                    </span>
+                              <h5 class="card-title"><span class="subhead">Base Price:</span> {{ i.Amount }} <span class="subhead">GRBT</span></h5>
+                              <div class="card-body" style="text-align: center">
+                                 <img class="card-img-top" src={{i.Url}} style="height: 250px;width: 250px" alt="Card image cap">
+                              </div>
+                              <div class="bid-credit-row">
+                                 <span class="auction-id"><span class="subhead">Auction ID:</span>{{i.Auction_Id}}</span>
+                              <hr>
+                           </div>
+                           <div id="dvzoom16720"  *ngIf="i.timeshow">
+                              <span class="subhead">Registration Starts in&nbsp;&nbsp;</span>{{hour_shower[i.Auction_Id]|number:'2.0'}}:{{min_shower[i.Auction_Id]|number:'2.0'}}:{{sec_shower[i.Auction_Id]|number:'2.0'}}
+                          </div>
+                           <div *ngIf="!i.timeshow">
+                              {{i.datedata}}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-sm-2"></div>
+               </div>
+            </div>
+         </div>
+  </div>    </div>
+  <div class="tab-pane fade " id="prereg" role="tabpanel" aria-labelledby="prereg-tab">    
+      <div  *ngFor="let image of register_now" >
+          <div class="col-sm-4"  style="margin-top: 20px;margin-bottom: 75px;text-align: center;">
+             <div class="row">
+                <div class="col-sm-10"  style="margin-top:25px">
+                   <div>
+                      <div class="card" style="border: 1px solid #274356;background-color:white;padding:0 0 10px 0;">
+                         <div class="card-header">
+                            <h4>{{image.ProductName}}</h4>
+                         </div>
+                         <hr>
+                         <div class="card-body">
+                            <span class="bid-price">Required Bidders&nbsp;&nbsp;
+                                <label id="Price16720" style="color: red"> {{image.required}}</label>
+                            </span>&nbsp;&nbsp;&nbsp;
+                            <span>Registration Amount&nbsp;&nbsp;
+                                    <label id="Price16720" style="color: green">{{image.minimumbid}}&nbsp;&nbsp;<label style="color:black">GRBT</label></label>
+                                    </span>
+                            <h5 class="card-title"><span class="subhead">Base Price:</span> {{ image.Amount }} <span class="subhead">GRBT</span></h5>
+                            <div class="card-body" style="text-align: center">
+                               <img  class="card-img-top" src={{image.Url}} style="height: 250px;width: 250px" alt="Card image cap">
+                            </div>
+                            <div class="bid-credit-row">
+                               <span class="auction-id"><span class="subhead">Auction ID:</span>{{image.Auction_Id}}</span>
+                            </div>
+                            <div class="bid-credit-row2" *ngIf="image.timeshow">
+                               <span class="bid-price"><span class="subhead">Registration ends at  :</span>
+                               <label id="Price16720">{{hour_shower[image.Auction_Id]|number:'2.0'}}:{{min_shower[image.Auction_Id]|number:'2.0'}}:{{sec_shower[image.Auction_Id]|number:'2.0'}}</label>
+                               </span>
+                            </div>
+                            <div *ngIf="!image.timeshow">
+                               {{image.datedata}}
+                            </div>
+                            <hr>
+                            <div class="card-footer">
+                              <input type="button" *ngIf="image.status==0" class="btn btn-success" id={{image.Auction_Id}} value="Register Now" (click)="preregistration(image.Auction_Id)"/>
+                              <p *ngIf="image.status==1" style="text-align: center;color: green">Registered</p>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="col-sm-2"></div>
+             </div>
+          </div>
+       </div>
+  </div>
+  <div class="tab-pane fade " id="outofreg" role="tabpanel" aria-labelledby="outofreg-tab">     
+      <div  *ngFor="let _image of expired" >
+          <div class="col-sm-4"  style="margin-top: 20px;margin-bottom: 75px;text-align: center;">
+             <div class="row">
+                <div class="col-sm-10"  style="margin-top:25px">
+                   <div>
+                      <div class="card" style="border: 1px solid #274356;background-color:white;padding:0 0 10px 0;">
+                         <div class="card-header">
+                            <h4>{{_image.ProductName}}</h4>
+                         </div>
+                         <hr>
+                         <div class="card-body">
+                            <span class="bid-price">Required Bidders&nbsp;&nbsp;
+                                <label id="Price16720" style="color: red"> {{_image.required}}</label>
+                            </span>&nbsp;&nbsp;&nbsp;
+                            <span class="bid-price" >Registered Bidders&nbsp;&nbsp;
+                                    <label id="Price16720" style="color: blue;"> {{_image.registered}}</label>
+                                </span><br>
+                                <span>Registration Amount&nbsp;&nbsp;
+                                    <label id="Price16720" style="color: green">{{_image.minimumbid}}&nbsp;&nbsp;<label style="color:black">GRBT</label></label>
+                                    </span>
+
+                                <h5 class="card-title"><span class="subhead">Base Price:</span> {{ _image.Amount }} <span class="subhead">GRBT</span></h5>
+                                <div class="card-body" style="text-align: center">
+                               <img  class="card-img-top" src={{_image.Url}} style="height: 250px;width: 250px" alt="Card image cap">
+                            </div>
+                            <div class="bid-credit-row">
+                               <span class="auction-id"><span class="subhead">Auction ID:</span>{{_image.Auction_Id}}</span>
+                           
+                            <hr>
+                         </div>
+                         <div class="card-footer">
+                            <p *ngIf="_image.status==0" style="text-align: center;color: red">Not Registered</p>
+                            <p *ngIf="_image.status==1" style="text-align: center;color: green">Registered</p>
+                          </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="col-sm-2"></div>
+             </div>
+          </div>
+       </div>
+</div>
+</div>

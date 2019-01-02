@@ -1,0 +1,153 @@
+<div class="container">
+<div class="col-sm-9">
+  <div class="panel panel-default ">
+      <h3 *ngIf="successful_message"  style="color: green;text-align: center">Auction Cloned successfully</h3>
+      <div class="panel-heading text-size" style="background-color: #273246;color: white">Reset Auction Details</div>
+      <div class="panel-body">
+        <form class="form-horizontal" action="#">
+            <fieldset class="content-group">     
+              <div class="form-group">   
+                  <label class="control-label col-lg-2">Product Name:</label>         
+                <div class="col-lg-10">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-menu6"></i></span>
+                    <input type="text"   class="form-control" id="productname" #productname autocomplete="off" readonly>
+                  </div>
+                </div>
+              </div> 
+                <div class="form-group">    
+                    <label class="control-label col-lg-2">Registration Start Time:</label>          
+                    <div class="col-lg-10">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i  class="icon-calendar"></i></span>
+                        <input type="datetime-local" class="form-control" id="regstarttime" #rgstarttime autocomplete="off" >
+                      </div>
+                    </div>
+                  </div>      
+                  <div class="form-group">    
+                      <label class="control-label col-lg-2">Registration End Time:</label>          
+                      <div class="col-lg-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i  class="icon-calendar"></i></span>
+                          <input type="datetime-local" class="form-control" id="regstarttime" #rgendtime autocomplete="off" >
+                        </div>
+                      </div>
+                    </div>      
+              <div class="form-group">    
+                  <label class="control-label col-lg-2">Start Time:</label>          
+                  <div class="col-lg-10">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i  class="icon-calendar"></i></span>
+                      <input type="datetime-local" class="form-control" id="bidstarttime" #bdstarttime autocomplete="off" >
+                    </div>
+                  </div>
+                </div>             
+                <div class="form-group">  
+                    <label class="control-label col-lg-2">End Time:</label>            
+                    <div class="col-lg-10">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                        <input type="datetime-local" class="form-control" id="bidendtime" #bdendtime autocomplete="off" >
+                      </div>
+                    </div>
+                  </div>     
+                  <div class="form-group">
+                      <label class="control-label col-lg-2">Base Price:</label>              
+                      <div class="col-lg-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><small>(GRBT Tokens)</small>:</span>
+                          <input type="text"  class="form-control" id="baseprice" #baseprice autocomplete="off" readonly>
+                        </div>
+                      </div>
+                    </div> 
+                    <!-- <br><p *ngIf="baseprice_error" style="text-align: center;color: red">Base price must be atleast {{least_baseprice}}</p> -->
+                    <div class="form-group">   
+                        <label class="control-label col-lg-2">Bid Increment:</label>           
+                        <div class="col-lg-10">
+                          <div class="input-group">
+                            <span class="input-group-addon"><small>(GRBT Tokens)</small>:</span>
+                            <input type="text"  class="form-control" id="bidincrement" #bidincrement autocomplete="off" readonly>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <br><p *ngIf="bid_increment_error" style="text-align: center;color: red">Bid Increment must be Greater then atleast 1</p> -->
+                      <div class="form-group">  
+                          <label class="control-label col-lg-2"> Min Bid:</label>            
+                          <div class="col-lg-10">
+                            <div class="input-group">
+                              <span class="input-group-addon"><small>(GRBT Tokens)</small>:</span>
+                              <input type="text"  class="form-control" id="minimumbid" #minimumbid autocomplete="off" readonly>
+                            </div>
+                          </div>
+                        </div> 
+                        <!-- <br><p *ngIf="minimumbid_error" style="text-align: center;color: red">minimum bid must be greater or equal to bid increment</p> -->
+                        <div class="form-group">  
+                            <label class="control-label col-lg-2"> Min Bidders:</label>            
+                            <div class="col-lg-10">
+                              <div class="input-group">
+                                <span class="input-group-addon"><small>(persons)</small>:</span>
+                                <input type="text"  class="form-control" id="minbidders" #minbidders autocomplete="off"  readonly>
+                              </div>
+                            </div>
+                          </div> 
+                        <div class="form-group">  
+                            <label class="control-label col-lg-2">Reset Time:</label>            
+                            <div class="col-lg-10">
+                              <div class="input-group">
+                                <span class="input-group-addon"><small>(in seconds)</small>:</span>
+                                <input type="text"  class="form-control" id="resettime" #resettime autocomplete="off" readonly>
+                              </div>
+                            </div>
+                          </div> 
+                          <!-- <br><p *ngIf="reset_time_error" style="text-align: center;color: red">Reset time must be greater than 0</p> -->
+      
+                          <div class="text-center">
+                              <br><button class="btn btn-success fonttransformation " (click)="clone(productname.value,bdstarttime.value,bdendtime.value,rgstarttime.value,rgendtime.value)">Create</button>
+                            </div>
+                            <p *ngIf="show_valid" style="text-align: center;color: red">* Enter valid details</p>
+                            <p *ngIf="show_revert_error" style="text-align: center;color: red">* Enter all details correctly</p>
+            </fieldset>
+        </form>    
+      </div>
+  </div>
+
+</div>
+<div class="col-sm-3">
+    <div class="panel panel-default ">
+        <div class="panel-heading text-size">DISPLAYED AUCTIONS</div>
+        <div class="panel-body">
+          <form class="form-inline">
+            <div class="form-group" style="text-align: center">           
+                <div class="table-responsive">
+                    <table class="table table-bordered table-framed">
+                        <thead class="tablecolor ">
+                            <tr>
+                              <th>Auction Id</th>
+                              <th>Auction Name</th>
+            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let element of selected_aid">
+                              <td>{{ element.auctionId }}</td>
+                              <!-- <td></td> -->
+                              <td><button type="button" class="btn btn-warning " value="select" (click)="setdetails(element.auctionId)">{{ element.productname }}</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>
+
+</div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+ <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

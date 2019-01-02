@@ -1,0 +1,25 @@
+.tabswitch{
+    background-color: #273246;
+    text-align: center;
+}
+.a{
+    color: white;
+    text-transform: uppercase;    
+}
+.a:hover{
+    color: burlywood;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #333;
+    font-weight: bolder;
+    font-size: 106%;
+    background-color:white;
+    border: 1px solid #ddd;
+    border-bottom-color: #ddd;
+    cursor: default;
+}
+
+.subhead{
+    color: orangered
+}

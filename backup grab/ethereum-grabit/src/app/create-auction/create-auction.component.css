@@ -1,0 +1,31 @@
+/* .auction-block {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+ }
+ .auction{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:5px;
+    overflow:hidden;
+ }
+ .panel{
+    border:1px solid #e67e22;
+    margin-top: 50px;
+ }
+ .panel-heading{
+    background-color:#e67e22;
+ }
+ */
+ .text-size{
+    font-size: 13px;
+    font-weight: bolder; 
+ }
+ .tablecolor{
+    background-color: #273246;
+    color: white;
+ }
+ .trhighlighting:hover{
+    background-color: bisque
+ }

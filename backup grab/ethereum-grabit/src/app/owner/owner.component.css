@@ -1,0 +1,25 @@
+
+ .f-size{
+    margin-top: 10px;
+    }
+    
+    .page-title {
+        padding: 0px 36px 32px 0;
+        display: block;
+        position: relative;
+    }
+    .navbar-nav>li>a:hover {
+        color: lemonchiffon;
+        background-color: transparent;
+    }
+    .navbar-nav>li>a:active {
+        color: moccasin;
+        background-color: transparent;
+    }
+    
+    .Logout{
+        cursor: pointer;
+    }
+    .topspace{
+       margin: 25px 0  0 0;
+   }
